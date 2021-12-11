@@ -1,0 +1,109 @@
+<nav class="navbar navbar-light bg-primary">
+    <div class="container-fluid">
+        <h3 class="dash-header">
+            My Employee(s)
+        </h3>
+        <!-- Button trigger modal -->
+        <div class="d-flex">
+            <button type="button" class="btn btn-success" (click)="openModal('add')">Add Emp</button>
+        </div>
+
+    </div>
+
+</nav>
+<div *ngIf="empData.length == 0">
+<div style="display: flex;justify-content: center;"> 
+<ng-lottie height="200px" width="200px" [options]="options"></ng-lottie>
+</div>
+
+<div style="text-align: center;"> 
+    <h3> Employee is not added yet.</h3>
+    <p>You can add employees by clicking "Add Emp" button (Available at top right corner of the screen). </p>
+</div>
+</div>
+<table class="table mt-3" style="margin-left: 20px;" *ngIf="empData.length >0">
+    <thead>
+        <tr>
+            <th scope="cal"> First Name</th>
+            <th scope="cal"> Last Name</th>
+            <th scope="cal"> Address</th>
+            <th scope="cal"> Mobile</th>
+            <th scope="cal"> DOB</th>
+            <th scope="cal"> City</th>
+            <th scope="cal"> Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let emp of empData">
+            <td>{{emp.firstName}}</td>
+            <td>{{emp.lastName}}</td>
+            <td>{{emp.address}}</td>
+            <td>{{emp.mobile}}</td>
+            <td>{{emp.dob}}</td>
+            <td>{{emp.city}}</td>
+            <td>
+                <button class="btn btn-success" (click)="openModal('edit',emp)"> Edit</button>
+                <button class="btn btn-danger mx-3" (click)="deleteEmp(emp)">Delete</button>
+            </td>
+        </tr>
+    </tbody>
+
+</table>
+
+
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Add Employee Details</h4>
+                <!-- <button type="button" class="close" aria-label="Close" (click)="onCloseHandled()"><span
+                        aria-hidden="true">&times;</span></button> -->
+            </div>
+            <div class="modal-body">
+                <form [formGroup] = "formValue">
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1">First Name</label>
+                      <input type="text" formControlName="firstName" class="form-control" id="firstName" placeholder="Enter first name">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1">Last Name</label>
+                        <input type="text" formControlName="lastName" class="form-control" id="lastName" placeholder="Enter last name">   
+                      </div>
+                    
+                      <div class="mb-3">
+                        <label for="exampleInputEmail1">Email address</label>
+                        <input type="email" formControlName="email" class="form-control" id="email" placeholder="Enter email">
+                      </div>
+                    
+                      <div class="mb-3">
+                      <label for="exampleInputPassword1">Address</label>
+                      <input type="text" class="form-control" formControlName="address" id="address" placeholder="Enter address">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1">Mobile</label>
+                        <input type="number" class="form-control" formControlName="mobile" id="mobile" placeholder="Enter mobile">
+                      </div>
+
+                      <div class="mb-3">
+                        <label for="exampleInputPassword1">City</label>
+                        <input type="text" class="form-control" id="city" formControlName="city" placeholder="Enter city">
+                      </div>
+
+                      <div class="mb-3">
+                        <label for="exampleInputPassword1">Date of Birth</label>
+                        <input type="date" class="form-control" id="dob" formControlName="dob" placeholder="Enter date of birth">
+                      </div>
+                   
+                  </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" (click)="onCloseHandled()">Cancel</button>
+                <button type="button" *ngIf="popOps!='edit'" class="btn btn-success"  (click)="addNewEmp()"> Add</button>
+                <button type="button" *ngIf="popOps=='edit'"class="btn btn-success"  (click)="updateEmp()"> Update</button>
+               
+            </div>
+        </div>
+    </div>
+</div>

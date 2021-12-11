@@ -1,0 +1,40 @@
+
+  <div class="container">
+    
+    <form [formGroup]="loginForm" (ngSubmit)="loginSubmit()">
+        <div class="logoCenter">
+        <img src="/assets/mb-logo.png" alt="image"><br/>
+        </div>
+
+      <label><b>Email-id</b></label>
+      <input formControlName="email" type="text" placeholder="Enter mail-id" name="uname" required>
+
+      <label><b>Password</b></label>
+      <input formControlName="password" type="password" placeholder="Enter Password" name="psw" required>
+
+
+
+      <div class=" d-flex">
+        <div class="mt-5 mx-auto my-auto">
+          <button type="submit" class="nextbutton">Login</button>
+        </div>
+
+
+        
+
+
+      </div>
+
+      <h6 style="text-align: center;">
+        <span>
+            <div class="mt-3 mx-auto my-auto">
+                Have'nt Register yet?
+                <button type="button" (click) = "registerMe() ">Register</button>
+              </div>
+        </span>
+      </h6>
+
+
+    </form>
+
+  </div>
